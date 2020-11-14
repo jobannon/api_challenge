@@ -1,40 +1,34 @@
-arr = [-2, 3, 1,-5]
+require 'pry'
+nums = [-3,2,-3,4,2]
+nums =[1,2]
 
 # @param {Integer[]} nums
 # @return {Integer}
 def min_start_value(nums)
   # initial defaults
-  broken = true 
-  x = 0
-  
-  #outer loop to increment x
-  until @broken == false do 
-     
-     #inner loop to check x thru the array
-      t = 0
-   nums.reduce(0) do |acc, ele|
-       if t = 0 
-          acc = x
-       end
-       acc = acc + ele
-       min_hit?(acc)
-       acc
-   end
-   if @broken == true
-     x = x + 1
-   elsif @broken == false 
-     return x - 1
-   end
-  end
-end
-       
-  def min_hit?(acc)
-      
-    if acc < 0 
-         @broken = true
-    elsif acc >= 0
-         @broken = false
+    @starting = 0 
+    # outer loop to increment @starting_num 
+    loop do
+      if went_below_zero?(@starting, nums)
+        @starting = @starting + 1
+      else
+        return @starting
+      end
     end
-      
-  end
-         
+
+    @starting
+end
+
+def went_below_zero?(starting, nums)
+    @average = starting
+    nums.each do |num|
+      @average = @average + num 
+      if @average < 1
+        return true
+      end
+    end
+    return false
+end
+
+@starting = min_start_value(nums)
+p @starting
